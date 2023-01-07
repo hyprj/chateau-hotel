@@ -7,11 +7,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { MenuLinks } from "./MenuLinks";
 import { ToggleMenuBtn } from "./ToggleMenuBtn";
 
-export const Header = () => {
+const pagesWithFixedHeader = ["/", "/contact-us", "/restaurant"];
+
+export function Header() {
   const { isOpen, onToggle } = useDisclosure();
+  const { pathname } = useRouter();
+
+  const position = pagesWithFixedHeader.includes(pathname) ? "fixed" : "sticky";
 
   const headerBg = useColorModeValue(
     "rgba(240, 240, 240, 0.8)",
@@ -20,12 +26,13 @@ export const Header = () => {
 
   return (
     <chakra.header
-      position="fixed"
+      position={position}
       zIndex={10}
       top="0"
       left="0"
       right="0"
       bg={headerBg}
+      height="16"
       backdropFilter="blur(5px)"
       paddingBlock="2"
       letterSpacing="normal"
@@ -50,4 +57,4 @@ export const Header = () => {
       </Container>
     </chakra.header>
   );
-};
+}

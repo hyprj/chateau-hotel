@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { Article } from "@features/articles/Article";
 import {
   API_URL,
   GetAllSlugs,
@@ -19,7 +20,8 @@ export default function Post({ post }: Props) {
   return (
     <div>
       <h2>{post.title}</h2>
-      <p>{post.content}</p>
+      {/* <p>{post.content}</p> */}
+      <Article post={post} />
     </div>
   );
 }
